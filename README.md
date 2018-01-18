@@ -1,8 +1,7 @@
-# Deliv::Sdk
+# Deliv
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/deliv/sdk`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+Deliv is a courier service.
+This gem was developed to handle our read-only use cases, but feel free to submit PRs to add more functionality!
 
 ## Installation
 
@@ -22,7 +21,25 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+In an initialization script:
+``` Ruby
+Deliv.configure do |config|
+  config.host = 'https://api-sandbox.deliv.co' # no trailing slash
+  config.version = 'v2'                        # use v2 as of 2018-01-24
+  config.api_key = '<your api key>'            # contact Deliv for this
+end
+```
+
+Where ever you need it,
+``` Ruby
+require 'deliv-sdk'
+
+id_or_tracking_code = '...'
+delivery = Deliv::Delivery.find(id_or_tracking_code)
+
+# for reference: http://docs.deliv.co/v2/#deliveries
+delivery.estimated_delivery_at
+```
 
 ## Development
 
@@ -32,7 +49,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/deliv-sdk.
+Bug reports and pull requests are welcome on GitHub at https://github.com/RentTheRunway/deliv-sdk.
 
 
 ## License
